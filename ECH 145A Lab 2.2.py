@@ -43,7 +43,6 @@ def get_data_fit(P, T):
             fit_err[i].append(np.sqrt(np.diag(so.curve_fit(func, emptyT[i][j], emptyP[i][j])[1])))
     return emptyP, emptyT, emptyt, fit, fit_err
 
-os.chdir(os.path.join('Documents', 'UCD', 'ECH 145A', 'Lab 2.2', 'Sample data'))
 #%%
 data_cal = [glob.glob('Calibration_1_??.csv'),glob.glob('Calibration_2_??.csv'),glob.glob('Calibration_3_??.csv'),glob.glob('Calibration_4_??.csv')]
 data_ar = [glob.glob('Osc_Ar_NoWeight_??.csv'),glob.glob('Osc_Ar_Mass1_??.csv'),glob.glob('Osc_Ar_Mass2_??.csv')]
@@ -98,13 +97,13 @@ time_co2 = [[], [], []] #s
 for i in range(len(data_ar)):
     for j in data_ar[i]:
         array = pd.read_csv(j, header=6).to_numpy() #mV/V
-        P_ar[i].append(array[:,2]/9/2) #psi
+        P_ar[i].append(array[:,2]/9/calibration) #psi
         time_ar[i].append(array[:,1])
         
 for i in range(len(data_co2)):
     for j in data_co2[i]:
         array = pd.read_csv(j, header=6).to_numpy() #mV/V
-        P_co2[i].append(array[:,2]/9/2) #psi
+        P_co2[i].append(array[:,2]/9/calibration) #psi
         time_co2[i].append(array[:,1])
         
         
